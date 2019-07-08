@@ -82,9 +82,6 @@ class Profile extends Component {
                         <IconbarLink as={ NavLink } to="/" exact>
                             <Icon icon="refresh" />
                         </IconbarLink>
-                        {/* <IconbarLink as={ NavLink } to="/secrets/">
-                            <Icon icon="list" />
-                        </IconbarLink> */}
                     </IconbarNav>
                 </Iconbar>
                 <ContentWrapper>
