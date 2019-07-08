@@ -2,6 +2,7 @@
   "name": "blockstack-authenticator",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://faragly.github.io/blockauth",
   "dependencies": {
     "array-move": "^2.1.0",
     "blockstack": "^19.1.0",
