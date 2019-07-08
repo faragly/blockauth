@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { rgba } from 'polished';
 import { mediaBreakpointUpSm } from "styled-bootstrap-responsive-breakpoints";
 import { Heading, Text, Button } from 'evergreen-ui';
-import { Logo } from '../styled/Logo';
+import Logo from '../styled/Logo';
 import theme from '../theme.js';
 
 const SigninCard = styled.div`
@@ -28,7 +28,7 @@ const SigninCardLogo = styled(Logo)`
     margin-bottom: 30px;
 `;
 
-export default class Signin extends Component {
+class Signin extends Component {
     render() {
         const { handleSignIn } = this.props;
 
@@ -38,9 +38,11 @@ export default class Signin extends Component {
                 <Heading is="h2" size={600}>Blockstack Authenticator</Heading>
                 <Text marginTop="default">Please sign in to continue</Text>
                 <Button appearance="primary" height={40} marginTop="default" iconBefore="log-in" onClick={ handleSignIn.bind(this) }>
-                    Sigh In with Blockstack
+                    Sign In with Blockstack
                 </Button>
             </SigninCard>
         );
     }
 }
+
+export default Signin;

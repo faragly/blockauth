@@ -35,13 +35,15 @@ const ProgressBar = styled.div`
     transition: width 0.6s ease;
 `;
 
-export default class CardList extends Component {
+class Card extends Component {
     constructor(props) {
         super(props);
         this.state = {
             token: null,
             timeRemaining: null
         };
+
+        this.timeStep = 30;
     }
 
     copyToClipboard() {
@@ -106,7 +108,7 @@ export default class CardList extends Component {
                     Your token expires in <Strong>{ timeRemaining }s</Strong>
                 </Paragraph>
                 <Progress>
-                    <ProgressBar style={{ width: Math.round((timeRemaining / 30) * 100) + '%' }} />
+                    <ProgressBar style={{ width: Math.round((timeRemaining / this.timeStep) * 100) + '%' }} />
                 </Progress>
             </Pane>
         );
@@ -121,3 +123,4 @@ export default class CardList extends Component {
     }
 }
 
+export default Card;
