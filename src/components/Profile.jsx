@@ -5,10 +5,10 @@ import { mediaBreakpointUpLg } from 'styled-bootstrap-responsive-breakpoints';
 import { Avatar, Heading, Icon, Link, Menu, Pane, Popover, Position, SearchInput, Spinner, Text } from 'evergreen-ui';
 import { Person } from 'blockstack';
 import CardList from './CardList';
-import { Iconbar } from '../styled/Iconbar';
-import { ContentWrapper } from '../styled/ContentWrapper';
-import { Header } from '../styled/Header';
-import { Logo } from '../styled/Logo';
+import Iconbar from '../styled/Iconbar';
+import ContentWrapper from '../styled/ContentWrapper';
+import Header from '../styled/Header';
+import Logo from '../styled/Logo';
 import theme from '../theme';
 
 const avatarFallbackImage = 'https://s3.amazonaws.com/onename/avatar-placeholder.png';
@@ -49,7 +49,7 @@ const Footer = styled.footer`
     `}
 `;
 
-export default class Profile extends Component {
+class Profile extends Component {
     constructor(props) {
         super(props);
 
@@ -157,3 +157,5 @@ export default class Profile extends Component {
         });
     }
 }
+
+export default Profile;

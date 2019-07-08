@@ -82,7 +82,7 @@ const SortableList = SortableContainer(({items, onAdd, onDetail, onEdit, onRemov
     );
 });
 
-export default class CardList extends Component {
+class CardList extends Component {
     constructor(props) {
         super(props);
 
@@ -165,24 +165,20 @@ export default class CardList extends Component {
         }
     }
 
-    fetchData() {
+    async fetchData() {
         const { userSession } = this.props;
         this.setState({ isLoading: true });
-        userSession.getFile('cards.json')
-            .then((file) => {
-                const cards = JSON.parse(file || '[]');
-                const cardIndex = cards.reduce((res, item) => res > item.id ? res : item.id, 0);
-                this.setState({
-                    cardIndex,
-                    cards,
-                })
-            })
-            .finally(() => {
-                this.setState({ isLoading: false })
-            });
+        const file = await userSession.getFile('cards.json');
+        const cards = JSON.parse(file || '[]');
+        const cardIndex = cards.reduce((res, item) => res > item.id ? res : item.id, 0);
+        this.setState({
+            cardIndex,
+            cards,
+            isLoading: false
+        });
     }
 
-    saveCard() {
+    async saveCard() {
         const { userSession } = this.props;
         const { dialog } = this.state;
         let cards = this.state.cards;
@@ -206,23 +202,21 @@ export default class CardList extends Component {
             cards.push(card);
         }
 
-        userSession.putFile('cards.json', JSON.stringify(cards))
-            .then(() => {
-                this.setState({
-                    cardIndex: card.id,
-                    cards,
-                    dialog: {
-                        ...dialog,
-                        isShown: false,
-                        isLoading: false,
-                        edit: null,
-                        user: '',
-                        service: '',
-                        secretKey: ''
-                    }
-                });
-                toaster.success('Card successfully added');
-            });
+        await userSession.putFile('cards.json', JSON.stringify(cards));
+        this.setState({
+            cardIndex: card.id,
+            cards,
+            dialog: {
+                ...dialog,
+                isShown: false,
+                isLoading: false,
+                edit: null,
+                user: '',
+                service: '',
+                secretKey: ''
+            }
+        });
+        toaster.success('Card successfully added');
     }
 
     handleDialogOpenComplete() {
@@ -355,3 +349,5 @@ export default class CardList extends Component {
         this.fetchData();
     }
 }
+
+export default CardList;

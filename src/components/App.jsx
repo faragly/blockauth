@@ -8,7 +8,7 @@ import theme from './../theme';
 const appConfig = new AppConfig();
 const userSession = new UserSession({ appConfig: appConfig });
 
-export default class App extends Component {
+class App extends Component {
     handleSignIn(e) {
         e.preventDefault();
         userSession.redirectToSignIn();
@@ -31,11 +31,17 @@ export default class App extends Component {
         );
     }
 
-    componentWillMount() {
+    async waitSignIn() {
         if (userSession.isSignInPending()) {
-            userSession.handlePendingSignIn().then((userData) => {
-                window.location = window.location.origin;
-            });
+            await userSession.handlePendingSignIn();
+            window.location = window.location.origin;
         }
     }
+
+
+    componentWillMount() {
+        this.waitSignIn();
+    }
 }
+
+export default App;

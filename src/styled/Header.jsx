@@ -5,7 +5,7 @@ import { rgba } from 'polished';
 import { mediaBreakpointUpLg } from 'styled-bootstrap-responsive-breakpoints';
 import theme from '../theme.js';
 
-export const Header = styled.div`
+const Header = styled.div`
     display: flex;
     //position: relative;
     //z-index: 100;
@@ -16,3 +16,5 @@ export const Header = styled.div`
 
     ${mediaBreakpointUpLg`border-bottom: 1px solid transparent;`}
 `;
+
+export default Header;

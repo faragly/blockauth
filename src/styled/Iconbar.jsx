@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { mediaBreakpointUpLg } from 'styled-bootstrap-responsive-breakpoints';
 import theme from '../theme';
 
-export const Iconbar = styled.div`
+const Iconbar = styled.div`
     width: 64px;
     display: none;
     flex-direction: column;
@@ -22,3 +22,5 @@ export const Iconbar = styled.div`
         display: flex;
     `}
 `;
+
+export default Iconbar

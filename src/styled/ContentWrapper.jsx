@@ -5,7 +5,7 @@ import { rgba } from 'polished';
 import { mediaBreakpointUpLg } from 'styled-bootstrap-responsive-breakpoints';
 import theme from '../theme.js';
 
-export const ContentWrapper = styled.div`
+const ContentWrapper = styled.div`
     flex-grow: 1;
     border-left-color: $gray-400;
     box-shadow: 0 0 7px ${rgba(theme.colors.grays[8], .08)};
@@ -21,3 +21,5 @@ export const ContentWrapper = styled.div`
         margin-left: 64px;
     `}
 `;
+
+export default ContentWrapper;
