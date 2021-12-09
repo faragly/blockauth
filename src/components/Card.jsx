@@ -14,6 +14,12 @@ const CodeContainer = styled.div`
 const LabelContainer = styled(CodeContainer)`
     justify-content: space-between;
     margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    ${Heading} h2 {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
 `;
 
 const Progress = styled.div`

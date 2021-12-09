@@ -7,8 +7,10 @@ import arrayMove from 'array-move';
 import { authenticator } from 'otplib/otplib-browser';
 import QRCode from 'qrcode.react';
 import Moment from 'react-moment';
+import { v4 as uuid } from 'uuid';
 import Card from './Card';
 import theme from '../theme.js';
+import { fetchCards, saveCards } from '../storage';
 
 const Wrapper = styled.div`
     display: flex;
@@ -88,7 +90,6 @@ export default class CardList extends Component {
 
         this.state = {
             cards: [],
-            cardIndex: 0,
             isLoading: false,
             dialog: {
                 services: ['Binance', 'Coinlist', 'Huobi', 'Bittrex', 'Kraken', 'Poloniex', 'Xapo', 'LocalBitcoins', 'Bitstamp', 'Bitfinex'],
@@ -152,44 +153,31 @@ export default class CardList extends Component {
         });
     }
 
-    handleCardRemove(id) {
-        const { userSession } = this.props;
+    async handleCardRemove(id) {
         let { cards } = this.state;
         const index = cards.findIndex(card => card.id === id);
 
         if (index > -1) {
             cards.splice(index, 1);
             this.setState({ cards });
-            userSession.putFile('cards.json', JSON.stringify(cards));
+            await saveCards(cards);
             toaster.success('Card deleted successfully');
         }
     }
 
-    fetchData() {
-        const { userSession } = this.props;
+    async fetchData() {
         this.setState({ isLoading: true });
-        userSession.getFile('cards.json')
-            .then((file) => {
-                const cards = JSON.parse(file || '[]');
-                const cardIndex = cards.reduce((res, item) => res > item.id ? res : item.id, 0);
-                this.setState({
-                    cardIndex,
-                    cards,
-                })
-            })
-            .finally(() => {
-                this.setState({ isLoading: false })
-            });
+        const cards = await fetchCards();
+        this.setState({ cards, isLoading: false });
     }
 
-    saveCard() {
-        const { userSession } = this.props;
+    async saveCard() {
         const { dialog } = this.state;
         let cards = this.state.cards;
         this.setState({ dialog: { ...dialog, isLoading: true }});
 
         let card = {
-            id: dialog.edit || (this.state.cardIndex + 1),
+            id: dialog.edit || uuid(),
             user: dialog.user.trim(),
             service: dialog.service.trim(),
             secretKey: dialog.secretKey.trim(),
@@ -206,23 +194,21 @@ export default class CardList extends Component {
             cards.push(card);
         }
 
-        userSession.putFile('cards.json', JSON.stringify(cards))
-            .then(() => {
-                this.setState({
-                    cardIndex: card.id,
-                    cards,
-                    dialog: {
-                        ...dialog,
-                        isShown: false,
-                        isLoading: false,
-                        edit: null,
-                        user: '',
-                        service: '',
-                        secretKey: ''
-                    }
-                });
-                toaster.success('Card successfully added');
-            });
+        await saveCards(cards);
+        this.setState({
+            cardIndex: card.id,
+            cards,
+            dialog: {
+                ...dialog,
+                isShown: false,
+                isLoading: false,
+                edit: null,
+                user: '',
+                service: '',
+                secretKey: ''
+            }
+        });
+        toaster.success('Card successfully added');
     }
 
     handleDialogOpenComplete() {
@@ -258,12 +244,11 @@ export default class CardList extends Component {
         });
     }
 
-    handleSortEnd({oldIndex, newIndex}) {
-        const { userSession } = this.props;
+    async handleSortEnd({oldIndex, newIndex}) {
         let cards = arrayMove(this.state.cards, oldIndex, newIndex);
 
         this.setState({ cards });
-        userSession.putFile('cards.json', JSON.stringify(cards));
+        await saveCards(cards);
     }
 
     render() {

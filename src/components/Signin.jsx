@@ -5,8 +5,9 @@ import { mediaBreakpointUpSm } from "styled-bootstrap-responsive-breakpoints";
 import { Heading, Text, Button } from 'evergreen-ui';
 import { Logo } from '../styled/Logo';
 import theme from '../theme.js';
+import { authenticate } from '../auth';
 
-const SigninCard = styled.div`
+const SignInCard = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -23,24 +24,22 @@ const SigninCard = styled.div`
     `}
 `;
 
-const SigninCardLogo = styled(Logo)`
+const SignInCardLogo = styled(Logo)`
     height: 50px;
     margin-bottom: 30px;
 `;
 
-export default class Signin extends Component {
+export default class SignIn extends Component {
     render() {
-        const { handleSignIn } = this.props;
-
         return (
-            <SigninCard>
-                <SigninCardLogo alt="Blockstack Authenticator" />
+            <SignInCard>
+                <SignInCardLogo alt="Blockstack Authenticator" />
                 <Heading is="h2" size={600}>Blockstack Authenticator</Heading>
                 <Text marginTop="default">Please sign in to continue</Text>
-                <Button appearance="primary" height={40} marginTop="default" iconBefore="log-in" onClick={ handleSignIn.bind(this) }>
+                <Button appearance="primary" height={40} marginTop="default" iconBefore="log-in" onClick={ () => authenticate() }>
                     Sigh In with Blockstack
                 </Button>
-            </SigninCard>
+            </SignInCard>
         );
     }
 }

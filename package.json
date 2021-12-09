@@ -1,10 +1,17 @@
 {
   "name": "blockstack-authenticator",
   "version": "1.0.0",
+  "homepage": "https://blockauth.js.org",
+  "author": {
+    "name": "Khalik Faradzhli"
+  },
   "private": true,
   "dependencies": {
+    "@stacks/auth": "^3.0.0",
+    "@stacks/connect": "^6.4.0",
+    "@stacks/profile": "^3.0.0",
+    "@stacks/storage": "^3.0.0",
     "array-move": "^2.1.0",
-    "blockstack": "^19.1.0",
     "clipboard-copy": "^3.0.0",
     "evergreen-ui": "^4.17.0",
     "moment": "^2.24.0",
@@ -21,7 +28,8 @@
     "styled-bootstrap-responsive-breakpoints": "^7.0.0",
     "styled-components": "^4.2.0",
     "styled-reboot": "^3.0.2",
-    "styled-system": "^4.2.2"
+    "styled-system": "^4.2.2",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "react-app-rewired start",

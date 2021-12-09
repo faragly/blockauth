@@ -6,6 +6,6 @@ export default {
     fontFamilyBase: 'Roboto, "Helvetica Neue", Helvetica, sans-serif',
     fontSizeBase: '0.8125rem',
     fontSizes: [
-        '0,7109375rem', '0.8125rem', '1.015625rem', '1,21875rem', '1.421875rem', '1.625rem', '2.03125rem'
+        '0,7109375rem', '0.8125rem', '1.015625rem', '1.21875rem', '1.421875rem', '1.625rem', '2.03125rem'
     ]
 }
