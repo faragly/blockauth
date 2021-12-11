@@ -1,46 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createGlobalStyle } from 'styled-components';
-import reboot from 'styled-reboot';
+import './index.css';
 import App from './components/App';
-import * as serviceWorker from './serviceWorker';
-import theme from './theme';
+import reportWebVitals from './reportWebVitals';
 
-const GlobalStyle = createGlobalStyle`
-    ${reboot({
-        fontFamilyBase: theme.fontFamilyBase,
-        fontSizeBase: theme.fontSizeBase,
-        bodyBg: theme.colors.grays[0]
-    })}
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-    button:focus {
-        outline: none;
-    }
-
-    body {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        position: relative;
-    }
-
-    #root {
-        flex: 1 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-`;
-
-ReactDOM.render((
-    <React.Fragment>
-        <GlobalStyle />
-        <App />
-    </React.Fragment>
-), document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

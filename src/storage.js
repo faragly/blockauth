@@ -1,5 +1,5 @@
-import { userSession } from './auth';
 import { Storage } from '@stacks/storage';
+import { userSession } from './auth';
 
 const storage = new Storage({ userSession });
 const CARDS_FILENAME = 'cards.json';

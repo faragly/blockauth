@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Heading, Pane, Paragraph, IconButton, Menu, Strong, Tooltip, Popover, Position, toaster } from 'evergreen-ui';
+import {
+    Heading,
+    Pane,
+    Paragraph,
+    Menu,
+    Strong,
+    Tooltip,
+    Popover,
+    Position,
+    toaster, MoreIcon, ClipboardIcon, ListDetailViewIcon, EditIcon, TrashIcon
+} from 'evergreen-ui';
 import copy from 'clipboard-copy';
-import { authenticator } from 'otplib/otplib-browser';
-import theme from '../theme.js';
+import { authenticator } from 'otplib';
+import PropTypes from 'prop-types';
 
 const CodeContainer = styled.div`
     display: flex;
@@ -11,12 +21,12 @@ const CodeContainer = styled.div`
     margin-bottom: 5px;
 `;
 
-const LabelContainer = styled(CodeContainer)`
+const LabelContainer = styled.div`
     justify-content: space-between;
     margin-bottom: 10px;
     display: grid;
     grid-template-columns: 1fr auto;
-    ${Heading} h2 {
+    h2 {
       text-overflow: ellipsis;
       overflow: hidden;
     }
@@ -27,7 +37,7 @@ const Progress = styled.div`
     height: 3px;
     overflow: hidden;
     font-size: 0.60938rem;
-    background-color: ${theme.colors.grays[2]};
+    background-color: #EBF0FF;
 `;
 
 const ProgressBar = styled.div`
@@ -37,21 +47,34 @@ const ProgressBar = styled.div`
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    background-color: ${theme.colors.primary};
     transition: width 0.6s ease;
+    background-color: #2952CC;
 `;
 
-export default class CardList extends Component {
+class Card extends Component {
+    static defaultProps = {
+        data: {
+            id: null,
+            user: '',
+            service: '',
+            secretKey: ''
+        },
+        onEdit: () => {},
+        onRemove: () => {},
+        onDetail: () => {}
+    }
+
     constructor(props) {
         super(props);
         this.state = {
             token: null,
             timeRemaining: null
         };
+        this.iconBgColor = '#8f95b2'
     }
 
-    copyToClipboard() {
-        copy(this.state.token);
+    async copyToClipboard() {
+        await copy(this.state.token);
         toaster.success('Token copied to clipboard');
     }
 
@@ -80,18 +103,18 @@ export default class CardList extends Component {
                         content={({ close }) =>
                             <Menu>
                                 <Menu.Group>
-                                    <Menu.Item icon="list-detail-view" onSelect={() => {
+                                    <Menu.Item icon={ListDetailViewIcon} onSelect={() => {
                                         this.props.onDetail(id);
                                         close();
                                     }}>View</Menu.Item>
-                                    <Menu.Item icon="edit" onSelect={() => {
+                                    <Menu.Item icon={EditIcon} onSelect={() => {
                                         this.props.onEdit(id);
                                         close();
                                     }}>Edit</Menu.Item>
                                 </Menu.Group>
                                 <Menu.Divider />
                                 <Menu.Group>
-                                    <Menu.Item icon="trash" intent="danger" onSelect={() => {
+                                    <Menu.Item icon={TrashIcon} intent="danger" onSelect={() => {
                                         this.props.onRemove(id);
                                         close();
                                     }}>Remove</Menu.Item>
@@ -99,13 +122,13 @@ export default class CardList extends Component {
                             </Menu>
                         }
                         >
-                        <IconButton height={24} appearance="minimal" icon="more" />
+                        <MoreIcon color={this.iconBgColor} />
                     </Popover>
                 </LabelContainer>
                 <CodeContainer>
                     <Heading is="h1" size={900}>{token}</Heading>
                     <Tooltip content="Copy to clipboard" position={Position.RIGHT}>
-                        <IconButton marginLeft={10} appearance="minimal" icon="clipboard" onClick={ this.copyToClipboard.bind(this) } />
+                        <ClipboardIcon color={this.iconBgColor} marginLeft={10} onClick={ this.copyToClipboard.bind(this) } />
                     </Tooltip>
                 </CodeContainer>
                 <Paragraph color="muted" marginBottom={5}>
@@ -127,3 +150,11 @@ export default class CardList extends Component {
     }
 }
 
+Card.propTypes = {
+    data: PropTypes.object.isRequired,
+    onDetail: PropTypes.func,
+    onRemove: PropTypes.func,
+    onEdit: PropTypes.func
+}
+
+export default Card;

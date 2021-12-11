@@ -1,20 +1,30 @@
 {
   "files": {
-    "main.js": "/static/js/main.67432233.chunk.js",
-    "main.js.map": "/static/js/main.67432233.chunk.js.map",
-    "polyfills-dom.js": "/static/js/polyfills-dom.5019db4d.chunk.js",
-    "polyfills-dom.js.map": "/static/js/polyfills-dom.5019db4d.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.3fe569ac.js",
-    "runtime~main.js.map": "/static/js/runtime~main.3fe569ac.js.map",
-    "static/js/3.f8adb8b6.chunk.js": "/static/js/3.f8adb8b6.chunk.js",
-    "static/js/3.f8adb8b6.chunk.js.map": "/static/js/3.f8adb8b6.chunk.js.map",
-    "static/js/4.0222016f.chunk.js": "/static/js/4.0222016f.chunk.js",
-    "static/js/4.0222016f.chunk.js.map": "/static/js/4.0222016f.chunk.js.map",
-    "static/js/5.e35f7a3e.chunk.js": "/static/js/5.e35f7a3e.chunk.js",
-    "static/js/5.e35f7a3e.chunk.js.map": "/static/js/5.e35f7a3e.chunk.js.map",
+    "main.css": "/static/css/main.a899e03d.chunk.css",
+    "main.js": "/static/js/main.ec68a3ff.chunk.js",
+    "main.js.map": "/static/js/main.ec68a3ff.chunk.js.map",
+    "polyfills-dom.js": "/static/js/polyfills-dom.1d8b4b14.chunk.js",
+    "polyfills-dom.js.map": "/static/js/polyfills-dom.1d8b4b14.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.18cb4898.js",
+    "runtime-main.js.map": "/static/js/runtime-main.18cb4898.js.map",
+    "static/js/3.0f7d7daa.chunk.js": "/static/js/3.0f7d7daa.chunk.js",
+    "static/js/3.0f7d7daa.chunk.js.map": "/static/js/3.0f7d7daa.chunk.js.map",
+    "static/js/4.9590bce6.chunk.js": "/static/js/4.9590bce6.chunk.js",
+    "static/js/4.9590bce6.chunk.js.map": "/static/js/4.9590bce6.chunk.js.map",
+    "static/js/5.cc7c89f4.chunk.js": "/static/js/5.cc7c89f4.chunk.js",
+    "static/js/5.cc7c89f4.chunk.js.map": "/static/js/5.cc7c89f4.chunk.js.map",
+    "static/js/6.1dd6f893.chunk.js": "/static/js/6.1dd6f893.chunk.js",
+    "static/js/6.1dd6f893.chunk.js.map": "/static/js/6.1dd6f893.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.29619193202ed0edd23e455dcd76e2a4.js": "/precache-manifest.29619193202ed0edd23e455dcd76e2a4.js",
-    "service-worker.js": "/service-worker.js",
-    "static/media/logo.svg": "/static/media/logo.91624b22.svg"
-  }
+    "static/css/main.a899e03d.chunk.css.map": "/static/css/main.a899e03d.chunk.css.map",
+    "static/js/3.0f7d7daa.chunk.js.LICENSE.txt": "/static/js/3.0f7d7daa.chunk.js.LICENSE.txt",
+    "static/js/polyfills-dom.1d8b4b14.chunk.js.LICENSE.txt": "/static/js/polyfills-dom.1d8b4b14.chunk.js.LICENSE.txt",
+    "static/media/logo.21c9f637.svg": "/static/media/logo.21c9f637.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.18cb4898.js",
+    "static/js/3.0f7d7daa.chunk.js",
+    "static/css/main.a899e03d.chunk.css",
+    "static/js/main.ec68a3ff.chunk.js"
+  ]
 }

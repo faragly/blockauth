@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button, Dialog, Heading, Pane, Paragraph, SideSheet, Spinner, Strong, TextInputField, toaster } from 'evergreen-ui';
+import {
+    Button,
+    Dialog,
+    Heading,
+    Pane,
+    Paragraph, PlusIcon,
+    SideSheet,
+    Spinner,
+    Strong,
+    TextInputField,
+    toaster
+} from 'evergreen-ui';
 import { mediaBreakpointOnlySm, mediaBreakpointOnlyMd, mediaBreakpointOnlyLg, mediaBreakpointOnlyXl } from 'styled-bootstrap-responsive-breakpoints';
-import { SortableContainer, SortableElement} from 'react-sortable-hoc';
-import arrayMove from 'array-move';
-import { authenticator } from 'otplib/otplib-browser';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { arrayMoveImmutable } from 'array-move';
+import { authenticator } from 'otplib';
 import QRCode from 'qrcode.react';
 import Moment from 'react-moment';
 import { v4 as uuid } from 'uuid';
 import Card from './Card';
-import theme from '../theme.js';
 import { fetchCards, saveCards } from '../storage';
 
 const Wrapper = styled.div`
@@ -56,16 +66,13 @@ const DetailsGrid = styled.div`
     grid-template-columns: 30% calc(70% - 15px);
     background-color: #fff;
     padding: 15px;
-    border-color: ${theme.colors.grays[1]};
-    border-width: 1px;
-    border-style: solid;
 `;
 
 const AddCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 3px dashed ${theme.colors.grays[1]};
+    border: 3px dashed #edeff5;
     min-height: 142px;
 `;
 
@@ -78,7 +85,7 @@ const SortableList = SortableContainer(({items, onAdd, onDetail, onEdit, onRemov
             <SortableItem key={`item-${index}`} index={index} data={value} onDetail={onDetail} onEdit={onEdit} onRemove={onRemove} />
         ))}
             <AddCard>
-                <Button marginRight={12} iconBefore="plus" onClick={onAdd}>Add secret</Button>
+                <Button iconBefore={PlusIcon} marginRight={12} onClick={onAdd}>Add secret</Button>
             </AddCard>
         </GridContainer>
     );
@@ -245,7 +252,7 @@ export default class CardList extends Component {
     }
 
     async handleSortEnd({oldIndex, newIndex}) {
-        let cards = arrayMove(this.state.cards, oldIndex, newIndex);
+        let cards = arrayMoveImmutable(this.state.cards, oldIndex, newIndex);
 
         this.setState({ cards });
         await saveCards(cards);
@@ -259,7 +266,7 @@ export default class CardList extends Component {
         return (
             this.state.isLoading ? <SpinnerWrapper><Spinner /></SpinnerWrapper>
             : <Container>
-                <Heading is="h1" size={700} marginBottom={20}>Authentification cards</Heading>
+                <Heading is="h1" size={700} marginBottom={20}>Authentication cards</Heading>
                 <SortableList
                     items={filteredCards}
                     onAdd={() => this.setState({ dialog: { ...dialog, isShown: true }})}
